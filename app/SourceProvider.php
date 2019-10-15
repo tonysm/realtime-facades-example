@@ -23,9 +23,4 @@ class SourceProvider extends Model
     protected $casts = [
         'meta' => 'json',
     ];
-
-    public function client(): SourceProviderClient
-    {
-        return SourceProviderFactory::make($this);
-    }
 }

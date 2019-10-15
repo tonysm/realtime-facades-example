@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\SourceProvider;
+use App\SourceProviderFactory;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -34,13 +35,13 @@ class SourceProvidersController extends Controller
             ->redirect();
     }
 
-    public function show(SourceProvider $sourceProvider)
+    public function show(SourceProvider $sourceProvider, SourceProviderFactory $providerFactory)
     {
         $this->authorize('view', $sourceProvider);
 
         return view('source-providers.show', [
             'sourceProvider' => $sourceProvider,
-            'repositories' => $sourceProvider->client()->getRepositories(),
+            'repositories' => $providerFactory->make($sourceProvider)->getRepositories(),
         ]);
     }
 }
