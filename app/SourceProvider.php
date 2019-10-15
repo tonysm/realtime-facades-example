@@ -23,7 +23,7 @@ class SourceProvider extends Model
         'meta' => 'json',
     ];
 
-    public function client(): Github
+    public function client()
     {
         return SourceProviderFactory::make($this);
     }
