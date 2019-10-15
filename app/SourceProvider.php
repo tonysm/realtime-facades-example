@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Services\Github;
+use App\Services\SourceProviderClient;
 use Illuminate\Database\Eloquent\Model;
 use Facades\App\SourceProviderFactory;
 
@@ -23,7 +24,7 @@ class SourceProvider extends Model
         'meta' => 'json',
     ];
 
-    public function client()
+    public function client(): SourceProviderClient
     {
         return SourceProviderFactory::make($this);
     }

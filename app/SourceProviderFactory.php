@@ -3,11 +3,12 @@
 namespace App;
 
 use App\Services\Github;
+use App\Services\SourceProviderClient;
 use InvalidArgumentException;
 
 class SourceProviderFactory
 {
-    public function make(SourceProvider $source)
+    public function make(SourceProvider $source): SourceProviderClient
     {
         switch ($source->type) {
             case 'Github':

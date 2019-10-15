@@ -5,7 +5,7 @@ namespace App\Services;
 use App\SourceProvider;
 use GuzzleHttp\Client;
 
-class Github
+class Github implements SourceProviderClient
 {
     /**
      * @var \App\SourceProvider
@@ -17,7 +17,7 @@ class Github
         $this->source = $provider;
     }
 
-    public function getRepositories()
+    public function getRepositories(): array
     {
         $response = (new Client())->get(
             sprintf(

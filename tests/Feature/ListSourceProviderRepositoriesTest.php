@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Services\SourceProviderClient;
 use App\SourceProvider;
 use App\User;
 use Facades\App\SourceProviderFactory;
@@ -16,7 +17,7 @@ class ListSourceProviderRepositoriesTest extends TestCase
     public function testCanListSourceProviderRepositories()
     {
         SourceProviderFactory::shouldReceive('make')->andReturn(
-            $client = Mockery::mock()
+            $client = Mockery::mock(SourceProviderClient::class)
         );
 
         $client->shouldReceive('getRepositories')->andReturn([
