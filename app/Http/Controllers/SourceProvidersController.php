@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\SourceProvider;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -31,5 +32,15 @@ class SourceProvidersController extends Controller
         return Socialite::driver('github')
             ->scopes(['read:user', 'public_repo'])
             ->redirect();
+    }
+
+    public function show(SourceProvider $sourceProvider)
+    {
+        $this->authorize('view', $sourceProvider);
+
+        return view('source-providers.show', [
+            'sourceProvider' => $sourceProvider,
+            'repositories' => $sourceProvider->client()->getRepositories(),
+        ]);
     }
 }

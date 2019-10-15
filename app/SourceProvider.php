@@ -2,8 +2,15 @@
 
 namespace App;
 
+use App\Services\Github;
 use Illuminate\Database\Eloquent\Model;
+use Facades\App\SourceProviderFactory;
 
+/**
+ * @property string $type
+ * @property string $name
+ * @property array $meta
+ */
 class SourceProvider extends Model
 {
     protected $fillable = [
@@ -15,4 +22,9 @@ class SourceProvider extends Model
     protected $casts = [
         'meta' => 'json',
     ];
+
+    public function client(): Github
+    {
+        return SourceProviderFactory::make($this);
+    }
 }
